@@ -18,6 +18,8 @@ before_install:
   - ls -l
   - pwd
   - uname -a
+  - date
+  - cat now
 script:
   #  Build commands
   - mkdir build
