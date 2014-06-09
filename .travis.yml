@@ -1,0 +1,26 @@
+# Travis-CI configuration file for SuperTuxKart
+#
+# Configuration manual:
+# http://docs.travis-ci.com/user/build-configuration/
+#
+language: cpp
+compiler:
+  - gcc
+#branches:
+#  only:
+#    - master
+before_install:
+  # Update repos
+  - sudo apt-get update -qq
+  # Install dependencies
+  - sudo apt-get install build-essential 
+  # Display system info
+  - ls -l
+  - pwd
+  - uname -a
+script:
+  #  Build commands
+  - mkdir build
+  - cd build
+  - make VERBOSE=1 -j 4
+
