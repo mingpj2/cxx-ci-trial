@@ -26,12 +26,5 @@ script:
   - cd build
   #- make VERBOSE=1 -j 4
   - echo "this is a test deploy" > runme
-deploy:
-  provider: releases
-  api_key:
-    secure: HYmpKHu1qof/HkJ6stM0T1ImKdbc32TZ9pHmAKa7y4g5ubXDZCGSQwhp8IHGXYEgwkiuXJFjVmiF7VA5
-  file: build/runme
-  on:
-    repo: mingpj2/cxx-ci-trial
 
 
