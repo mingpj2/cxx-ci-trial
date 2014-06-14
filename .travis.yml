@@ -31,6 +31,8 @@ script:
   - pwd
   - mkdir build
   - cd build
-  - make VERBOSE=1 -j 4
+  #- make VERBOSE=1 -j 4
   - pwd
+  - echo "this is a test deploy" > runme
+  - cat runme
 
