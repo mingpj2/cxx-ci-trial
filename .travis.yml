@@ -6,12 +6,17 @@
 language: cpp
 compiler:
   - gcc
-#branches:
-#  only:
-#    - master
+
 before_install:
   # Update repos
   - sudo apt-get update -qq
+
+  # Install chroot system
+  - sudo apt-get install dchroot schroot debootstrap
+  - mkdir /home/travis/build/chroot
+  - sudo debootstrap --variant=buildd --arch amd64 trusty /home/travis/build/chroot
+  - cat /etc/schroot/schroot.conf
+
   # Install dependencies
   - sudo apt-get install build-essential 
   # Display system info
