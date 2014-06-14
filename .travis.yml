@@ -17,12 +17,20 @@ before_install:
   # Display system info
   - ls -l
   - pwd
+  - whoami
   - uname -a
   - date
   - cat now
+  - ls -l ../
+  - mkdir ../chroot
+  - cd ../chroot
+  - pwd
+
 script:
   #  Build commands
+  - pwd
   - mkdir build
   - cd build
   - make VERBOSE=1 -j 4
+  - pwd
 
