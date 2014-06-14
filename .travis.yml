@@ -19,11 +19,13 @@ before_install:
   - pwd
   - whoami
   - uname -a
+  - echo "TRAVIS_BUILD_DIR $TRAVIS_BUILD_DIR"
+  - echo "TRAVIS_BRANCH    $TRAVIS_BRANCH"
   - date
   - cat now
-  - ls -l ../
-  - mkdir ../chroot
-  - cd ../chroot
+  - ls -la ../../
+  - mkdir ../../chroot
+  - cd    ../../chroot
   - pwd
 
 script:
