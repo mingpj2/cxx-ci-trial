@@ -19,7 +19,7 @@ before_install:
   - sudo bash $TRAVIS_BUILD_DIR/linux-conf-command
   - cat /etc/schroot/schroot.conf
   - mkdir /home/travis/srv
-  ##- sudo debootstrap --variant=buildd --arch amd64 trusty /home/travis/srv
+  - sudo debootstrap --variant=buildd --arch amd64 trusty /home/travis/srv
   - sudo touch        /home/travis/srv/chroot-in-srv
   - sudo mkdir -p     /home/travis/srv/home/travis
   - sudo chown travis /home/travis/srv/home/travis
