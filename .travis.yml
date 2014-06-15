@@ -24,9 +24,10 @@ before_install:
   - sudo mkdir -p     /home/travis/srv/home/travis
   - sudo chown travis /home/travis/srv/home/travis
   - sudo chgrp travis /home/travis/srv/home/travis
-  - schroot -c trusty pwd
-  - schroot -c trusty ls -l
-  - schroot -c trusty ls -l /
+  - ls -ld /home/travis/srv/*
+  - schroot -c trusty -- pwd
+  - schroot -c trusty -- ls -l
+  - schroot -c trusty -- ls -l /
   #- schroot -c trusty bash linux-chroot-command
   - date
 
