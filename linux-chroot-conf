@@ -1,0 +1,10 @@
+
+[trusty]
+description=Ubuntu Trusty
+directory=/home/travis/srv
+type=directory
+priority=3
+users=travis
+groups=sbuild
+root-groups=root
+
