@@ -17,11 +17,17 @@ before_install:
   - date
   - mkdir /home/travis/srv
   - sudo debootstrap --variant=buildd --arch amd64 trusty /home/travis/srv
-  - sudo cat /etc/schroot/schroot.conf >> /etc/schroot/schroot.conf
+  - cat /etc/schroot/schroot.conf
+  - sudo bash linux-conf-command
+  - cat /etc/schroot/schroot.conf
+  - sudo touch        /home/travis/srv/chroot-in-srv
   - sudo mkdir -p     /home/travis/srv/home/travis
   - sudo chown travis /home/travis/srv/home/travis
   - sudo chgrp travis /home/travis/srv/home/travis
-  - schroot -c trusty "pwd; ls -l"
+  - schroot -c trusty pwd
+  - schroot -c trusty ls -l
+  - schroot -c trusty ls -l /
+  #- schroot -c trusty bash linux-chroot-command
   - date
 
   # Install dependencies
