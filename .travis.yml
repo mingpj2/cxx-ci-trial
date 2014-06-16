@@ -29,6 +29,16 @@ before_install:
   - schroot -c trusty -- pwd
   - schroot -c trusty -- ls -l
   - schroot -c trusty -- ls -l /
+  - schroot -c trusty -- sudo cat /etc/shadow
+
+  # Install chroot dependencies
+  - schroot -c trusty -- sudo apt-get update -qq
+  - schroot -c trusty -- sudo apt-get install build-essential cmake
+  - schroot -c trusty -- sudo apt-get install libogg-dev libvorbis-dev libopenal-dev
+  - schroot -c trusty -- sudo apt-get install libxxf86vm-dev libcurl4-openssl-dev
+  - schroot -c trusty -- sudo apt-get install libfribidi-dev libbluetooth-dev
+  - schroot -c trusty -- sudo apt-get install libgl1-mesa-dev libglu1-mesa-dev
+
   #- schroot -c trusty bash linux-chroot-command
   - date
 
