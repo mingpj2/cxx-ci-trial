@@ -17,7 +17,7 @@ before_install:
   - sudo apt-get install dchroot schroot debootstrap
   - date
   - cat /etc/schroot/schroot.conf
-  - sudo bash $TRAVIS_BUILD_DIR/linux-conf-command
+  - sudo bash $TRAVIS_BUILD_DIR/linux-conf-command1
   - cat /etc/schroot/schroot.conf
   - mkdir /home/travis/srv
   - ls -l /home/travis/srv
