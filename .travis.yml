@@ -24,10 +24,10 @@ before_install:
 
   # Install chroot system -- debootstrap install jail
   - ls -ld /usr/share/debootstrap/scripts/*
-  - grep 'apt' /usr/share/debootstrap/scripts/gutsy
-  - sudo sed -e 's/\"apt\"/\"apt sudo apt-utils\"/' -i /usr/share/debootstrap/scripts/gutsy
-  - grep 'apt' /usr/share/debootstrap/scripts/gutsy
-  - sudo debootstrap --variant=minbase --arch amd64 trusty /home/travis/srv
+  - grep 'Essential: yes)' /usr/share/debootstrap/scripts/gutsy
+  - sudo sed -e 's/Essential: yes)\"/Essential: yes) sudo\"/' -i /usr/share/debootstrap/scripts/gutsy
+  - grep 'Essential: yes)' /usr/share/debootstrap/scripts/gutsy
+  - sudo debootstrap --variant=buildd --arch amd64 trusty /home/travis/srv
   - sudo touch        /home/travis/srv/chroot-in-srv
   - sudo mkdir -p     /home/travis/srv/home/travis
   - sudo chown travis /home/travis/srv/home/travis
@@ -44,8 +44,9 @@ before_install:
 
   # Install chroot dependencies
   - schroot -c trusty -- sudo apt-get update -qq
-  - schroot -c trusty -- sudo bash $TRAVIS_BUILD_DIR/linux-chroot-command1
+  ##- schroot -c trusty -- sudo bash $TRAVIS_BUILD_DIR/linux-chroot-command1
   ##- schroot -c trusty -- sudo apt-get -y install build-essential cmake
+  - schroot -c trusty -- sudo apt-get -y install cmake
   ##- schroot -c trusty -- sudo apt-get -y install libogg-dev libvorbis-dev libopenal-dev
   ##- schroot -c trusty -- sudo apt-get -y install libxxf86vm-dev libcurl4-openssl-dev
   ##- schroot -c trusty -- sudo apt-get -y install libfribidi-dev libbluetooth-dev
