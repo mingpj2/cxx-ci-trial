@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cat linux-chroot-conf >> /etc/schroot/schroot.conf
+
+

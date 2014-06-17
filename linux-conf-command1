@@ -1,5 +1,0 @@
-#!/bin/bash
-
-cat linux-conf-data1 >> /etc/schroot/schroot.conf
-
-
