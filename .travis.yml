@@ -38,7 +38,9 @@ before_install:
   - schroot -c trusty -- pwd
   - schroot -c trusty -- ls -l
   - schroot -c trusty -- ls -l /
-  - exit 1
+  - sudo cat  /home/travis/srv/etc/sudoers
+  - sudo bash $TRAVIS_BUILD_DIR/linux-conf-command2 /home/travis/srv/etc/sudoers
+  - sudo cat  /home/travis/srv/etc/sudoers
   - schroot -c trusty -- sudo cat /etc/shadow
 
   # Install chroot dependencies
