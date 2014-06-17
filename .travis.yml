@@ -44,12 +44,12 @@ before_install:
   - schroot -c trusty -- sudo cat /etc/shadow
 
   # Install chroot dependencies
-  - schroot -c trusty -- sudo apt-get update -qq
-  - schroot -c trusty -- sudo apt-get install build-essential cmake
-  - schroot -c trusty -- sudo apt-get install libogg-dev libvorbis-dev libopenal-dev
-  - schroot -c trusty -- sudo apt-get install libxxf86vm-dev libcurl4-openssl-dev
-  - schroot -c trusty -- sudo apt-get install libfribidi-dev libbluetooth-dev
-  - schroot -c trusty -- sudo apt-get install libgl1-mesa-dev libglu1-mesa-dev
+  - schroot -c trusty -- sudo apt-get -y update -qq
+  - schroot -c trusty -- sudo apt-get -y install build-essential cmake
+  - schroot -c trusty -- sudo apt-get -y install libogg-dev libvorbis-dev libopenal-dev
+  - schroot -c trusty -- sudo apt-get -y install libxxf86vm-dev libcurl4-openssl-dev
+  - schroot -c trusty -- sudo apt-get -y install libfribidi-dev libbluetooth-dev
+  - schroot -c trusty -- sudo apt-get -y install libgl1-mesa-dev libglu1-mesa-dev
 
   - ls -l
   - schroot -c trusty -- bash $TRAVIS_BUILD_DIR/linux-chroot-command
