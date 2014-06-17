@@ -16,11 +16,11 @@ before_install:
   - pwd
   - sudo apt-get install dchroot schroot debootstrap
   - date
-  - cat /etc/schroot/schroot.conf
+  ##- cat /etc/schroot/schroot.conf
   - sudo bash $TRAVIS_BUILD_DIR/linux-conf-command1
-  - cat /etc/schroot/schroot.conf
+  ##- cat /etc/schroot/schroot.conf
   - mkdir /home/travis/srv
-  - ls -l /home/travis/srv
+  ##- ls -l /home/travis/srv
 
   # Install chroot system -- debootstrap install jail
   - ls -ld /usr/share/debootstrap/scripts/*
@@ -31,14 +31,14 @@ before_install:
   - sudo chown travis /home/travis/srv/home/travis
   - sudo chgrp travis /home/travis/srv/home/travis
   - ls -ld /home/travis/srv/*
-  - sudo grep travis /etc/sudoers
-  - sudo cat  /etc/sudoers
+  ##- sudo grep travis /etc/sudoers
+  ##- sudo cat  /etc/sudoers
   - schroot -c trusty -- pwd
   - schroot -c trusty -- ls -l
   - schroot -c trusty -- ls -l /
-  - sudo cat  /home/travis/srv/etc/sudoers
+  ##- sudo cat  /home/travis/srv/etc/sudoers
   - sudo bash $TRAVIS_BUILD_DIR/linux-conf-command2 /home/travis/srv/etc/sudoers
-  - sudo cat  /home/travis/srv/etc/sudoers
+  ##- sudo cat  /home/travis/srv/etc/sudoers
 
   # Install chroot dependencies
   - schroot -c trusty -- sudo apt-get update -qq
@@ -71,6 +71,7 @@ before_install:
 script:
   #  Build commands
   - pwd
+  - ls -l
   - mkdir build
   - cd build
   #- make VERBOSE=1 -j 4
