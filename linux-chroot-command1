@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo 'yes | sudo apt-get -y install netbase'
+
+yes | sudo apt-get -y install netbase
+
+##build-essential cmake
+
