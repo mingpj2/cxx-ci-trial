@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo grep 'Essential' /usr/share/debootstrap/scripts/gutsy
+     grep 'Essential' /usr/share/debootstrap/scripts/gutsy
+
+echo sed ...
+  sudo sed -e 's/Essential: yes)\"/Essential: yes) sudo\"/' -i /usr/share/debootstrap/scripts/gutsy
+
+echo grep 'Essential' /usr/share/debootstrap/scripts/gutsy
+  grep 'Essential' /usr/share/debootstrap/scripts/gutsy
+
