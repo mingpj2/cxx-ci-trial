@@ -11,8 +11,9 @@ before_install:
   # Update repos
   - sudo apt-get update -qq
 
-  # Install chroot system
+  # Install chroot system -- chroot debootstrap
   - date
+  - pwd
   - sudo apt-get install dchroot schroot debootstrap
   - date
   - cat /etc/schroot/schroot.conf
@@ -20,9 +21,13 @@ before_install:
   - cat /etc/schroot/schroot.conf
   - mkdir /home/travis/srv
   - ls -l /home/travis/srv
+
+  # Install chroot system -- debootstrap install jail
   - ls -ld /usr/share/debootstrap/scripts/*
   - grep 'apt' /usr/share/debootstrap/scripts/gutsy
-  - sudo debootstrap --print-debs --variant=minbase --arch amd64 trusty /home/travis/srv
+  - sudo sed -e 's/\"apt\"/\"apt sudo\"/' -i /usr/share/debootstrap/scripts/gutsy
+  - grep 'apt' /usr/share/debootstrap/scripts/gutsy
+  - sudo debootstrap --variant=minbase --arch amd64 trusty /home/travis/srv
   - sudo touch        /home/travis/srv/chroot-in-srv
   - sudo mkdir -p     /home/travis/srv/home/travis
   - sudo chown travis /home/travis/srv/home/travis
@@ -41,8 +46,10 @@ before_install:
   - schroot -c trusty -- sudo apt-get install libfribidi-dev libbluetooth-dev
   - schroot -c trusty -- sudo apt-get install libgl1-mesa-dev libglu1-mesa-dev
 
-  #- schroot -c trusty bash linux-chroot-command
+  - ls -l
+  - schroot -c trusty -- bash $TRAVIS_BUILD_DIR/linux-chroot-command
   - date
+  - ls -l
 
   # Install dependencies
   - sudo apt-get install build-essential 
@@ -56,8 +63,6 @@ before_install:
   - date
   - cat now
   - ls -la $HOME
-  #- mkdir ../../chroot
-  - cd    ../../chroot
   - pwd
 
 script:
