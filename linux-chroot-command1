@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export DEBIAN_FRONTEND=noninteractive
+
 echo 'yes | apt-get -y install netbase'
 
 yes | apt-get -y install netbase
