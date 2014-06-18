@@ -41,7 +41,7 @@ before_install:
   - schroot -c trusty -- ls -l
   - schroot -c trusty -- ls -l /
   - schroot -c trusty -- sudo apt-cache policy
-  - schroot -c trusty -- sudo apt-get install libopenal-dev
+  - schroot -c trusty -- sudo apt-get -y install libopenal-dev
 
   # Install chroot dependencies
   - schroot -c trusty -- sudo apt-get update -qq
