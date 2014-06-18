@@ -80,7 +80,7 @@ all:
 	echo "TRAVIS_BUILD_DIR $(TRAVIS_BUILD_DIR)"
 	echo "TRAVIS_BRANCH    $(TRAVIS_BRANCH)"
 	echo "makefile schroot run..."
-	schroot -c trusty -- bash -c "TRAVIS_BUILD_DIR=$(TRAVIS_BUILD_DIR) TRAVIS_BRANCH=$(TRAVIS_BRANCH) $(TRAVIS_BUILD_DIR)/linux-chroot-command"
+	schroot -c trusty -- bash -c "TRAVIS_BUILD_DIR=$(TRAVIS_BUILD_DIR) TRAVIS_BRANCH=$(TRAVIS_BRANCH) bash $(TRAVIS_BUILD_DIR)/linux-chroot-command"
 	echo "makefile schroot done."
 	date
 	ls -l
