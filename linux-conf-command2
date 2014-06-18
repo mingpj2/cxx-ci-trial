@@ -18,6 +18,8 @@ echo sed ...
 echo cat /home/travis/srv/etc/apt/sources.list
      cat /home/travis/srv/etc/apt/sources.list
 
+exit 0
+
 echo mount /proc /sys /dev
 mount -o bind /proc  /home/travis/srv/proc
 mount -o bind /sys   /home/travis/srv/sys
