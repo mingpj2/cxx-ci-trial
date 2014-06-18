@@ -16,12 +16,12 @@ all:
 	##- cat /etc/schroot/schroot.conf
 	####sudo bash $TRAVIS_BUILD_DIR/linux-conf-command1
 	####cat linux-conf-data1 >> /etc/schroot/schroot.conf
-	echo '[trusty]'                   >> /etc/schroot/schroot.conf
-	echo 'description=Ubuntu Trusty'  >> /etc/schroot/schroot.conf
-	echo 'directory=/home/travis/srv' >> /etc/schroot/schroot.conf
-	echo 'users=travis'               >> /etc/schroot/schroot.conf
-	echo 'groups=travis'              >> /etc/schroot/schroot.conf
-	echo 'root-groups=root'           >> /etc/schroot/schroot.conf
+	sudo bash -c "echo '[trusty]'                   >> /etc/schroot/schroot.conf"
+	sudo bash -c "echo 'description=Ubuntu Trusty'  >> /etc/schroot/schroot.conf"
+	sudo bash -c "echo 'directory=/home/travis/srv' >> /etc/schroot/schroot.conf"
+	sudo bash -c "echo 'users=travis'               >> /etc/schroot/schroot.conf"
+	sudo bash -c "echo 'groups=travis'              >> /etc/schroot/schroot.conf"
+	sudo bash -c "echo 'root-groups=root'           >> /etc/schroot/schroot.conf"
 
 	##- cat /etc/schroot/schroot.conf
 	mkdir /home/travis/srv
@@ -52,12 +52,12 @@ all:
 	cat /home/travis/srv/etc/apt/sources.list
 	sed -e 's/ main/ main universe/' -i  /home/travis/srv/etc/apt/sources.list
 	cat /home/travis/srv/etc/apt/sources.list
-	mount -o bind /proc  /home/travis/srv/proc
-	mount -o bind /sys   /home/travis/srv/sys
-	mount -o bind /dev   /home/travis/srv/dev
-	mount -o bind /home/travis  /home/travis/srv/home/travis
-	grep travis /etc/passwd >>  /home/travis/srv/etc/passwd
-	grep travis /etc/group  >>  /home/travis/srv/etc/group 
+	sudo mount -o bind /proc  /home/travis/srv/proc
+	sudo mount -o bind /sys   /home/travis/srv/sys
+	sudo mount -o bind /dev   /home/travis/srv/dev
+	sudo mount -o bind /home/travis  /home/travis/srv/home/travis
+	sudo bash -c "grep travis /etc/passwd >>  /home/travis/srv/etc/passwd"
+	sudo bash -c "grep travis /etc/group  >>  /home/travis/srv/etc/group "
 	
 	schroot -c trusty -- sudo apt-get update
 	schroot -c trusty -- pwd
