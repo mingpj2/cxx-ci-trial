@@ -36,6 +36,7 @@ before_install:
   ##- sudo cat  /home/travis/srv/etc/sudoers
   - sudo bash $TRAVIS_BUILD_DIR/linux-conf-command2 
   ##- sudo cat  /home/travis/srv/etc/sudoers
+  - schroot -c trusty -- sudo apt-get update
   - schroot -c trusty -- pwd
   - schroot -c trusty -- ls -l
   - schroot -c trusty -- ls -l /
