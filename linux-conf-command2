@@ -18,3 +18,16 @@ echo sed ...
 echo cat /home/travis/srv/etc/apt/sources.list
      cat /home/travis/srv/etc/apt/sources.list
 
+echo mount /proc /sys /dev
+mount -o bind /proc  /home/travis/srv/proc
+mount -o bind /sys   /home/travis/srv/sys
+mount -o bind /dev   /home/travis/srv/dev
+mount -o bind /home/travis  /home/travis/srv/home/travis
+
+echo add user passwd and group
+grep travis /etc/passwd 
+grep travis /etc/group  
+
+grep travis /etc/passwd >>  /home/travis/srv/etc/passwd
+grep travis /etc/group  >>  /home/travis/srv/etc/group 
+
