@@ -34,6 +34,6 @@ script:
   - pwd
   - echo "this is a test deploy" > runme
   - cat runme
-  - make -f $TRAVIS_BUILD_DIR/linux-ubt64trusty-mk
+  - make -C $TRAVIS_BUILD_DIR -f $TRAVIS_BUILD_DIR/linux-ubt64trusty-mk
   - ls -l
 
