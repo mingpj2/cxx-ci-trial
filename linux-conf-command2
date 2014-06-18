@@ -1,6 +1,20 @@
 #!/bin/bash
 
-echo 'echo ''travis ALL=(ALL) NOPASSWD:ALL'' >> '$1
+echo 'echo ''travis ALL=(ALL) NOPASSWD:ALL'' >> '/home/travis/srv/etc/sudoers
 
-echo 'travis ALL=(ALL) NOPASSWD:ALL' >> $1
+echo 'travis ALL=(ALL) NOPASSWD:ALL' >> /home/travis/srv/etc/sudoers
+
+
+echo cp /etc/resolv.conf /home/travis/srv/etc/
+     cp /etc/resolv.conf /home/travis/srv/etc/
+
+
+echo cat /home/travis/srv/etc/apt/sources.list
+     cat /home/travis/srv/etc/apt/sources.list
+
+echo sed ...
+     sed -e 's/ main/ main universe/' -i  /home/travis/srv/etc/apt/sources.list
+
+echo cat /home/travis/srv/etc/apt/sources.list
+     cat /home/travis/srv/etc/apt/sources.list
 

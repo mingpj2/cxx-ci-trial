@@ -37,8 +37,9 @@ before_install:
   - schroot -c trusty -- ls -l
   - schroot -c trusty -- ls -l /
   ##- sudo cat  /home/travis/srv/etc/sudoers
-  - sudo bash $TRAVIS_BUILD_DIR/linux-conf-command2 /home/travis/srv/etc/sudoers
+  - sudo bash $TRAVIS_BUILD_DIR/linux-conf-command2 
   ##- sudo cat  /home/travis/srv/etc/sudoers
+  - schroot -c trusty -- sudo apt-cache policy
 
   # Install chroot dependencies
   - schroot -c trusty -- sudo apt-get update -qq
