@@ -46,11 +46,11 @@ all:
 	##- sudo cat  /home/travis/srv/etc/sudoers
 	
 	####  - sudo bash $TRAVIS_BUILD_DIR/linux-conf-command2 
-	echo 'travis ALL=(ALL) NOPASSWD:ALL' >> /home/travis/srv/etc/sudoers
-	cp /etc/resolv.conf /home/travis/srv/etc/
-	cat /etc/hosts >> /home/travis/srv/etc/hosts
+	sudo bash -c "echo 'travis ALL=(ALL) NOPASSWD:ALL' >> /home/travis/srv/etc/sudoers"
+	sudo cp /etc/resolv.conf /home/travis/srv/etc/
+	sudo bash -c "cat /etc/hosts >> /home/travis/srv/etc/hosts"
 	cat /home/travis/srv/etc/apt/sources.list
-	sed -e 's/ main/ main universe/' -i  /home/travis/srv/etc/apt/sources.list
+	sudo sed -e 's/ main/ main universe/' -i  /home/travis/srv/etc/apt/sources.list
 	cat /home/travis/srv/etc/apt/sources.list
 	sudo mount -o bind /proc  /home/travis/srv/proc
 	sudo mount -o bind /sys   /home/travis/srv/sys
