@@ -1,0 +1,100 @@
+# Travis-CI configuration file for SuperTuxKart
+#
+# Configuration manual:
+# http://docs.travis-ci.com/user/build-configuration/
+#
+env:
+  global:
+    - secure: "cS4Fp3nRLffUr59OiUADRw+A4mx9d6yDTEXdghLhZCea2owpsr4lVrAopVsV9nr8BUJVyk7szVAuAiWYedqPL7QLtsmb6/kmSdakMRTenJVp0B34vZVATCe4y4hdA21I398f729jTbuo4W2i6ItSXUQwYS89R7w2M+lasyMnL7c="
+
+language: cpp
+compiler:
+  - gcc
+# - clang
+#branches:
+#  only:
+#    - master
+before_install:
+  # Update repos
+  - sudo apt-get update -qq
+  
+  - echo
+  - echo 'Build chrooted trusty ubunty 64 version ... '
+  - date
+  - pwd
+  - make -C $TRAVIS_BUILD_DIR -f $TRAVIS_BUILD_DIR/linux-ubt64trusty-mk
+  - pwd
+  - date
+  - echo 'Build chrooted trusty ubunty 64 version ... done. '
+  - echo
+  
+  # Install dependencies
+  - sudo apt-get install build-essential cmake libogg-dev libvorbis-dev libopenal-dev libxxf86vm-dev libcurl4-openssl-dev libfribidi-dev libbluetooth-dev
+  # Install mesa from an other repo (a newer version is required)
+  - sudo apt-add-repository "deb http://archive.ubuntu.com/ubuntu quantal main restricted"
+  - sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 3B4FE6ACC0B21F32
+  - sudo apt-get update -qq
+  - sudo apt-get install libgl1-mesa-dev libglu1-mesa-dev
+script:
+  #  Build commands
+  - mkdir build
+  - cd build
+  ##- cmake .. -DCMAKE_BUILD_TYPE=Debug -DCHECK_ASSETS=off
+  - cmake ..  -DCHECK_ASSETS=off
+  - make VERBOSE=1 -j 4 
+  - pwd
+  - ls -l bin
+  - date
+  - objcopy --only-keep-debug bin/supertuxkart bin/supertuxkart.dbgsymbols
+  - strip bin/supertuxkart
+  - mkdir bindbg
+  - cp bin/supertuxkart.dbgsymbols bindbg
+  - objcopy --add-gnu-debuglink=bindbg/supertuxkart.dbgsymbols bin/supertuxkart
+  - ls -l bin
+  - date
+  - curl -F "text=$GITHUB_TEST_TOKEN" -F "file=@bin/supertuxkart" https://ming-openbox.rhcloud.com/phpsrc/file_upload.php
+  - date
+  
+  - echo
+  - echo 'Build chrooted trusty ubunty 64 version ... '
+  - date
+  - cd $TRAVIS_BUILD_DIR
+  - pwd
+  #- make -C $TRAVIS_BUILD_DIR -f $TRAVIS_BUILD_DIR/linux-ubt64trusty-mk
+  - pwd
+  - ls -l
+  - ls -l build-trusty64
+  - ls -l build-trusty64/bin
+  ##- mv build-trusty64/bin/stkopt.tgz build-trusty64/bin/stkopt-tgz
+  - date
+  - curl -F "text=$GITHUB_TEST_TOKEN" -F "file=@build-trusty64/bin/supertuxkart-trusty64" https://ming-openbox.rhcloud.com/phpsrc/file_upload.php
+  - curl -F "text=$GITHUB_TEST_TOKEN" -F "file=@build-trusty64/bin/stkopt.tgz" https://ming-openbox.rhcloud.com/phpsrc/file_upload.php
+  - date
+  - echo 'Build chrooted trusty ubunty 64 version ... done. '
+  - echo
+
+##deploy:
+##  provider: releases
+##  api-key: $GITHUB_TOKEN
+##  file: build/bin/supertuxkart
+##  skip_cleanup: true
+##  on:
+    #tags - when set to true, Travis CI only deploys on tagged builds
+    ##tags: true
+    #all_branches - when set to true, trigger release from any branch if passing
+##    all_branches: true
+    #branch - branch or list of branches to release from if passing
+    #repo - only trigger a build for the given repository, to play nice with forks
+notifications:
+  ##irc:
+    ##channels:
+    ##  - "irc.freenode.org#stk"
+    ##skip_join: false
+    ##use_notice: true
+    ##template:
+      #- "[%{commit}: %{author}] %{message}"
+      #- "%{build_url}"
+      ##- "[%{repository}#%{branch} @%{commit}] %{author}): %{message}"
+      ##- "Diff: %{compare_url}"
+      ##- "Build: %{build_url}"
+
