@@ -1,9 +1,0 @@
-
-[trusty]
-description=Ubuntu Trusty
-directory=/home/travis/srv
-#type=directory
-users=travis
-groups=travis
-root-groups=root
-
