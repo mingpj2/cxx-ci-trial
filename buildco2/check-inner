@@ -3,8 +3,8 @@
 GITHUB_USER=mingpj2
 GITHUB_REPO=cxx-ci-trial
 
-GITHUB_INNER_USER=mingpj2
-GITHUB_INNER_REPO=cxx-ci-inner
+GITHUB_INNER_USER=supertuxkart
+GITHUB_INNER_REPO=stk-code
 
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

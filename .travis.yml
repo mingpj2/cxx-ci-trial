@@ -29,7 +29,7 @@ script:
   - pwd
   - ls -l
 
-  - cd $TRAVIS_BUILD_DIR/buildco1
+  - cd $TRAVIS_BUILD_DIR/buildco2
   - pwd
   - ls -l
   - echo "travis yml invoke bash ./linux-checkout ..."
