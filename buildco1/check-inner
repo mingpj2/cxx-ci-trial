@@ -1,0 +1,88 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+echo
+echo '================================================================'
+echo
+date
+echo
+
+echo "cd ${DIR}"
+cd ${DIR}
+
+echo pwd
+pwd
+
+echo 'ls -l'
+ls -l
+
+
+if [ -d cxx-ci-inner ]; then rm -rf cxx-ci-inner; fi
+
+
+git clone --depth=50 --branch=master https://github.com/mingpj2/cxx-ci-inner
+    if [ ! -d cxx-ci-inner ]; then exit 1; fi
+    cd cxx-ci-inner
+    git log --pretty=oneline > ../xlog-all-lines
+    cat ../xlog-all-lines | sed -e 's/^\(.......\)[^ ]*/\1/' > ../xlog-all-short
+    head -n 1 ../xlog-all-short | sed -e 's/ .*//' > ../xlog-hash1
+    cat ../xlog-hash1
+
+
+echo "cd ${DIR}"
+cd ${DIR}
+ls -l 
+
+if [ -d cxx-ci-inner ]; then rm -rf cxx-ci-inner; fi
+
+
+needbuild=0
+
+if [ -f xlog-hash1 ]; then
+    tobuild=$(cat xlog-hash1)
+    if [ -f hashtobuild ]; then 
+        savedtobuild=$(cat hashtobuild)
+        if [ $tobuild == $savedtobuild ]; then
+            echo "Nothing to build. Inner project hash " $tobuild " . "
+        else
+            mv hashtobuild hashtobuild-backup
+            cp xlog-hash1 hashtobuild
+            echo "Need to build. Inner project hash " $tobuild " . Last hash " $savedtobuild " . "
+            needbuild=1
+        fi
+    else
+        cp xlog-hash1 hashtobuild
+        echo "Need to build. Inner project hash " $tobuild " . No last hash . "
+        needbuild=1
+    fi
+else
+    echo "Failed to check out inner project."
+    exit 1
+fi
+
+echo 'ls -l'
+ls -l
+
+
+if [ $needbuild -ne 0 ] ; then
+    echo 
+    echo 'Touch github project...'
+    git add hashtobuild
+    if [ "x$GITHUB_PROJECT_TOKEN" == "x" ]; then
+        git commit -m "manually update to inner project hash $(cat hashtobuild)"
+        git push
+        sleep 3
+        git push
+        echo
+    else
+        #git push -q https://<token>@github.com/<user>/<repo>
+        echo
+    fi
+fi
+
+echo
+echo '================================================================'
+echo
+
+

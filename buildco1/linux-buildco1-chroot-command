@@ -15,11 +15,9 @@ echo 'ls -l'
 ls -l
 
 cd cxx-ci-inner
-cat ../xlog-hash1
+cat ../hashtobuild
 
-echo 'g++ -c test.cpp -o aout-trusty'
-echo 'g++ -DBLD_NUM='$dstamp' -DBLD_HASH="\"'$(cat ../xlog-hash1)'\"" test.cpp -o aout-trusty-'$(cat ../xlog-hash1)
-g++ -DBLD_NUM=$dstamp -DBLD_HASH="\"$(cat ../xlog-hash1)\"" test.cpp -o aout-trusty-$(cat ../xlog-hash1)
+g++ -DBLD_NUM=$dstamp -DBLD_HASH="\"$(cat ../hashtobuild)\"" test.cpp -o aout-trusty-$(cat ../hashtobuild)
 if [ $? -ne 0 ]; then rc=1 fi
 
 ls -l
