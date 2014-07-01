@@ -1,0 +1,97 @@
+#!/bin/bash
+
+GITHUB_USER=mingpj2
+GITHUB_REPO=cxx-ci-trial
+
+GITHUB_INNER_USER=mingpj2
+GITHUB_INNER_REPO=cxx-ci-inner
+
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+echo
+echo '================================================================'
+echo
+date
+echo
+
+echo "cd ${DIR}"
+cd ${DIR}
+
+echo pwd
+pwd
+
+echo 'ls -l'
+ls -l
+
+
+if [ -d $GITHUB_INNER_REPO ]; then rm -rf $GITHUB_INNER_REPO; fi
+
+
+git clone --depth=50 --branch=master https://github.com/$GITHUB_INNER_USER/$GITHUB_INNER_REPO
+    if [ ! -d $GITHUB_INNER_REPO ]; then exit 1; fi
+    cd $GITHUB_INNER_REPO
+    git log --pretty=oneline > ../xlog-all-lines
+    cat ../xlog-all-lines | sed -e 's/^\(.......\)[^ ]*/\1/' > ../xlog-all-short
+    head -n 1 ../xlog-all-short | sed -e 's/ .*//' > ../xlog-hash1
+    cat ../xlog-hash1
+
+
+echo "cd ${DIR}"
+cd ${DIR}
+ls -l 
+
+if [ -d $GITHUB_INNER_REPO ]; then rm -rf $GITHUB_INNER_REPO; fi
+
+
+needbuild=0
+
+if [ -f xlog-hash1 ]; then
+    tobuild=$(cat xlog-hash1)
+    if [ -f hashtobuild ]; then 
+        savedtobuild=$(cat hashtobuild)
+        if [ $tobuild == $savedtobuild ]; then
+            echo "Nothing to build. Inner project hash " $tobuild " . "
+        else
+            mv hashtobuild hashtobuild-backup
+            cp xlog-hash1 hashtobuild
+            echo "Need to build. Inner project hash " $tobuild " . Last hash " $savedtobuild " . "
+            needbuild=1
+        fi
+    else
+        cp xlog-hash1 hashtobuild
+        echo "Need to build. Inner project hash " $tobuild " . No last hash . "
+        needbuild=1
+    fi
+else
+    echo "Failed to check out inner project."
+    exit 1
+fi
+
+echo 'ls -l'
+ls -l
+
+
+if [ $needbuild -ne 0 ] ; then
+    echo 
+    echo 'Touch github project...'
+    git add hashtobuild
+    if [ "x$GITHUB_PROJECT_TOKEN" == "x" ]; then
+        git commit -m "manually update to inner project hash $(cat hashtobuild)"
+        git push
+        sleep 3
+        git push
+        echo
+    else
+        git push -q https://$GITHUB_PROJECT_TOKEN@github.com/$GITHUB_USER/$GITHUB_REPO
+        sleep 3
+        git push -q https://$GITHUB_PROJECT_TOKEN@github.com/$GITHUB_USER/$GITHUB_REPO
+        echo
+    fi
+fi
+
+echo
+echo '================================================================'
+echo
+
+
