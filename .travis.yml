@@ -28,12 +28,14 @@ script:
   #  Build commands
   - pwd
   - ls -l
-  - mkdir build
-  - cd build
-  #- make VERBOSE=1 -j 4
+  - cd $TRAVIS_BUILD_DIR/buildco1
   - pwd
-  - echo "this is a test deploy" > runme
-  - cat runme
-  - make -C $TRAVIS_BUILD_DIR -f $TRAVIS_BUILD_DIR/linux-ubt64trusty-mk
   - ls -l
+  - echo "travis yml invoke bash ./linux-buildco1-checkout ..."
+  - bash ./linux-buildco1-checkout
+  - echo "travis yml invoke bash ./linux-buildco1-checkout ... done"
+  - pwd
+  - ls -l
+  ##- make -C $TRAVIS_BUILD_DIR -f $TRAVIS_BUILD_DIR/linux-ubt64trusty-mk
+
 

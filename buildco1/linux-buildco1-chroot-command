@@ -1,0 +1,43 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+echo "cd ${DIR}"
+cd ${DIR}
+
+rc=0
+dstamp=$(date +"%m%d%H%I")
+
+echo pwd
+pwd
+
+echo 'ls -l'
+ls -l
+
+cd cxx-ci-inner
+cat ../xlog-hash1
+
+echo 'g++ -c test.cpp -o aout-trusty'
+echo 'g++ -DBLD_NUM='$dstamp' -DBLD_HASH="\"'$(cat ../xlog-hash1)'\"" test.cpp -o aout-trusty-'$(cat ../xlog-hash1)
+g++ -DBLD_NUM=$dstamp -DBLD_HASH="\"$(cat ../xlog-hash1)\"" test.cpp -o aout-trusty-$(cat ../xlog-hash1)
+if [ $? -ne 0 ]; then rc=1 fi
+
+ls -l
+
+echo "cd ${DIR}"
+cd ${DIR}
+
+echo 'ls -l'
+ls -l
+
+
+echo
+echo "TRAVIS_BUILD_DIR $TRAVIS_BUILD_DIR"
+echo "TRAVIS_BRANCH    $TRAVIS_BRANCH   "
+echo
+
+echo "rc $rc"
+echo
+exit $rc
+
+
