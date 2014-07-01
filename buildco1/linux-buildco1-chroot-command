@@ -17,8 +17,16 @@ ls -l
 cd cxx-ci-inner
 cat ../hashtobuild
 
-g++ -DBLD_NUM=$dstamp -DBLD_HASH="\"$(cat ../hashtobuild)\"" test.cpp -o aout-trusty-$(cat ../hashtobuild)
+suffix=$(cat ../hashtobuild)
+exename=aout-trusty-$suffix
+g++ -DBLD_NUM=$dstamp -DBLD_HASH="\"$suffix\"" test.cpp -o $exename
+aout-trusty-$(cat ../hashtobuild)
 if [ $? -ne 0 ]; then rc=1 fi
+
+if [ -f $exename ]; then
+    chmod +x $exename
+    ./exename
+fi
 
 ls -l
 
