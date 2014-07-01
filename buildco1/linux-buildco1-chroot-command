@@ -19,13 +19,15 @@ cat ../hashtobuild
 
 suffix=$(cat ../hashtobuild)
 exename=aout-trusty-$suffix
+
 g++ -DBLD_NUM=$dstamp -DBLD_HASH="\"$suffix\"" test.cpp -o $exename
-aout-trusty-$(cat ../hashtobuild)
-if [ $? -ne 0 ]; then rc=1 fi
+if [ $? -ne 0 ]; then rc=1; fi
 
 if [ -f $exename ]; then
+    echo "Run the built binary executible ..."
     chmod +x $exename
-    ./exename
+    ./$exename
+    echo
 fi
 
 ls -l
@@ -44,6 +46,7 @@ echo
 
 echo "rc $rc"
 echo
+
 exit $rc
 
 
