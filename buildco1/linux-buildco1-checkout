@@ -32,7 +32,7 @@ else
     git clone --depth=50 --branch=master https://github.com/mingpj2/cxx-ci-inner
     cd cxx-ci-inner
     git log --pretty=oneline > ../xlog-all-lines
-    cat ../xlog-all-lines | sed -e 's/^\(.......\)[^ ]*/\1/' ../xlog-all-short
+    cat ../xlog-all-lines | sed -e 's/^\(.......\)[^ ]*/\1/' > ../xlog-all-short
     head -n 1 ../xlog-all-short | sed -e 's/ .*//' > ../xlog-hash1
     cat ../xlog-hash1
 

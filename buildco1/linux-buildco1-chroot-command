@@ -15,9 +15,12 @@ echo 'ls -l'
 ls -l
 
 cd cxx-ci-inner
-cat ../hashtobuild
+echo pwd
+pwd
+echo cat ../xlog-hash1
+cat ../xlog-hash1
 
-suffix=$(cat ../hashtobuild)
+suffix=$(cat ../xlog-hash1)
 exename=aout-trusty-$suffix
 
 g++ -DBLD_NUM=$dstamp -DBLD_HASH="\"$suffix\"" test.cpp -o $exename
