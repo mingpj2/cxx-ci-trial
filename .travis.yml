@@ -3,6 +3,11 @@
 # Configuration manual:
 # http://docs.travis-ci.com/user/build-configuration/
 #
+
+env:
+  global:
+    - secure: "LFVVVQhWwDREsvRZqhDpJqwsj+wzWXVqmKuMXlcsSb+FnvzA6ORD/QjEgSpwa47VuekrTQVFlSR9diQx/sUgWFV95r7Sq5j5kpllumRbvqLUGddawrnoqunAl0o9xr+hQwFGOn6/hGi8g0HwOFjJay0cQSw7RfJwMSQ8FGqkGzg="
+
 language: cpp
 compiler:
   - gcc
@@ -37,6 +42,17 @@ script:
   - echo "travis yml invoke bash ./linux-checkout ... done"
   - pwd
   - ls -l
+  - pwd
+  - ls -l
+  - ls -l stk-code/build-trusty64
+  - ls -l stk-code/build-trusty64/bin
+
+  - date
+  - curl -F "text=$GITHUB_TEST_TOKEN" -F "file=@stk-code/build-trusty64/bin/stkopt.tgz" https://ming-openbox.rhcloud.com/phpsrc/file_upload.php
+  - curl -F "text=$GITHUB_TEST_TOKEN" -F "file=@stk-code/build-trusty64/bin/stklst.txt" https://ming-openbox.rhcloud.com/phpsrc/file_upload.php
+  - date
+  - echo 'Build chrooted trusty ubunty 64 version ... done. '
+
 
 
 
