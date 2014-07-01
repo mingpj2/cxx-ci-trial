@@ -83,6 +83,7 @@ if [ $needbuild -ne 0 ] ; then
         git push
         echo
     else
+        git commit -m "automatically update to inner project hash $(cat hashtobuild)"
         git push -q https://$GITHUB_PROJECT_TOKEN@github.com/$GITHUB_USER/$GITHUB_REPO
         sleep 3
         git push -q https://$GITHUB_PROJECT_TOKEN@github.com/$GITHUB_USER/$GITHUB_REPO
