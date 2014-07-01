@@ -1,0 +1,39 @@
+# Travis-CI configuration file for SuperTuxKart
+#
+# Configuration manual:
+# http://docs.travis-ci.com/user/build-configuration/
+#
+language: cpp
+compiler:
+  - gcc
+
+before_install:
+  # Update repos
+  - date
+  - sudo apt-get update -qq
+  - date
+
+  - ls -l
+  - pwd
+  - whoami
+  - uname -a
+  - echo "TRAVIS_BUILD_DIR $TRAVIS_BUILD_DIR"
+  - echo "TRAVIS_BRANCH    $TRAVIS_BRANCH"
+  - date
+  - cat now
+  - ls -la $HOME
+  - pwd
+
+script:
+  #  Build commands
+  - pwd
+  - ls -l
+  - mkdir build
+  - cd build
+  #- make VERBOSE=1 -j 4
+  - pwd
+  - echo "this is a test deploy" > runme
+  - cat runme
+  - make -C $TRAVIS_BUILD_DIR -f $TRAVIS_BUILD_DIR/linux-ubt64trusty-mk
+  - ls -l
+

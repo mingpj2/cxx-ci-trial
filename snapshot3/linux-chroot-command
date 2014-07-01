@@ -1,0 +1,25 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+echo "cd ${DIR}"
+cd ${DIR}
+
+echo pwd
+pwd
+
+echo 'ls -l'
+ls -l
+
+echo 'g++ -c test.cpp -o aout-trusty'
+g++ -c test.cpp -o aout-trusty
+
+echo 'ls -l'
+ls -l
+
+
+echo
+echo "TRAVIS_BUILD_DIR $TRAVIS_BUILD_DIR"
+echo "TRAVIS_BRANCH    $TRAVIS_BRANCH   "
+echo
+
