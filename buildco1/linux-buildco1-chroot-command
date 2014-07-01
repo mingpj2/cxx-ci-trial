@@ -1,5 +1,8 @@
 #!/bin/bash
 
+GITHUB_INNER_REPO=cxx-ci-inner
+
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 echo "cd ${DIR}"
@@ -14,7 +17,7 @@ pwd
 echo 'ls -l'
 ls -l
 
-cd cxx-ci-inner
+cd $GITHUB_INNER_REPO
 echo pwd
 pwd
 echo cat ../xlog-hash1

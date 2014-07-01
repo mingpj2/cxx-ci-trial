@@ -1,5 +1,12 @@
 #!/bin/bash
 
+GITHUB_USER=mingpj2
+GITHUB_REPO=cxx-ci-trial
+
+GITHUB_INNER_USER=mingpj2
+GITHUB_INNER_REPO=cxx-ci-inner
+
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 echo
@@ -18,12 +25,12 @@ echo 'ls -l'
 ls -l
 
 
-if [ -d cxx-ci-inner ]; then rm -rf cxx-ci-inner; fi
+if [ -d $GITHUB_INNER_REPO ]; then rm -rf $GITHUB_INNER_REPO; fi
 
 
-git clone --depth=50 --branch=master https://github.com/mingpj2/cxx-ci-inner
-    if [ ! -d cxx-ci-inner ]; then exit 1; fi
-    cd cxx-ci-inner
+git clone --depth=50 --branch=master https://github.com/$GITHUB_INNER_USER/$GITHUB_INNER_REPO
+    if [ ! -d $GITHUB_INNER_REPO ]; then exit 1; fi
+    cd $GITHUB_INNER_REPO
     git log --pretty=oneline > ../xlog-all-lines
     cat ../xlog-all-lines | sed -e 's/^\(.......\)[^ ]*/\1/' > ../xlog-all-short
     head -n 1 ../xlog-all-short | sed -e 's/ .*//' > ../xlog-hash1
@@ -34,7 +41,7 @@ echo "cd ${DIR}"
 cd ${DIR}
 ls -l 
 
-if [ -d cxx-ci-inner ]; then rm -rf cxx-ci-inner; fi
+if [ -d $GITHUB_INNER_REPO ]; then rm -rf $GITHUB_INNER_REPO; fi
 
 
 needbuild=0
@@ -76,7 +83,9 @@ if [ $needbuild -ne 0 ] ; then
         git push
         echo
     else
-        #git push -q https://<token>@github.com/<user>/<repo>
+        git push -q https://$GITHUB_PROJECT_TOKEN@github.com/$GITHUB_USER/$GITHUB_REPO
+        sleep 3
+        git push -q https://$GITHUB_PROJECT_TOKEN@github.com/$GITHUB_USER/$GITHUB_REPO
         echo
     fi
 fi
