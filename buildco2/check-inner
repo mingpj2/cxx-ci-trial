@@ -1,10 +1,10 @@
 #!/bin/bash
 
-GITHUB_USER=mingpj2
-GITHUB_REPO=cxx-ci-trial
+GITHUB_USER=$(cat prjuser)
+GITHUB_REPO=$(cat prjrepo)
 
-GITHUB_INNER_USER=supertuxkart
-GITHUB_INNER_REPO=stk-code
+GITHUB_INNER_USER=$(cat prjinnuser)
+GITHUB_INNER_REPO=$(cat prjinnrepo)
 
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

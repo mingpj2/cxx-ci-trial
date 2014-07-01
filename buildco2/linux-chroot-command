@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GITHUB_INNER_REPO=stk-code
+GITHUB_INNER_REPO=$(cat prjinnrepo)
 
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
