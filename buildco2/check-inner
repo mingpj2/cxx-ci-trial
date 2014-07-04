@@ -87,6 +87,8 @@ if [ $needbuild -ne 0 ] ; then
         if [ -f ../../ssh_wrapper.sh ]; then 
             git remote rm origin
             git remote add origin git@github.com:$GITHUB_USER/$GITHUB_REPO.git
+            git config user.name ci-trigger
+            git config user.email ci-trigger@openshift
             GIT_SSH=`pwd`/../../ssh_wrapper.sh git push -q origin master 
             sleep 3
             GIT_SSH=`pwd`/../../ssh_wrapper.sh git push -q origin master 
