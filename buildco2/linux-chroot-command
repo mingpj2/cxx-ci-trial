@@ -51,12 +51,19 @@ suffix=$(cat ../xlog-hash1)-$dstamp
   mv ../stkopt/share/supertuxkart/data ../stkopt/
   rm -r ../stkopt/bin ../stkopt/share
 
+  ln -s ../stk-assets/karts    ../stkopt/data/karts
+  ln -s ../stk-assets/music    ../stkopt/data/music
+  ln -s ../stk-assets/sfx      ../stkopt/data/sfx  
+  ln -s ../stk-assets/textures ../stkopt/data/textures
+  ln -s ../stk-assets/tracks   ../stkopt/data/tracks  
+
   echo " " > ../stkopt/readme
   date >> ../stkopt/readme
   echo " " >> ../stkopt/readme
-  echo "Get by svn co : " >> ../stkopt/readme
+  echo "Get assets by svn co : " >> ../stkopt/readme
   echo "  https://svn.code.sf.net/p/supertuxkart/code/stk-assets" >> ../stkopt/readme
-  echo "Then link into data/ these assets dirs: " >> ../stkopt/readme
+  echo " " > ../stkopt/readme
+  echo "Then link into data/ these assets dirs (or create stk-assets/ or a link beside data/): " >> ../stkopt/readme
   echo "  karts music sfx textures tracks" >> ../stkopt/readme
   echo " " >> ../stkopt/readme
   echo "Download links: " >> ../stkopt/readme
@@ -68,7 +75,7 @@ suffix=$(cat ../xlog-hash1)-$dstamp
 
   echo '#!/bin/bash' > ../stkopt/go
   echo 'DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"' >> ../stkopt/go
-  echo 'HOME=$DIR $DIR/supertuxkart' >> ../stkopt/go
+  echo 'HOME=$DIR $DIR/supertuxkart $*' >> ../stkopt/go
   chmod a+rx ../stkopt/go
 
   echo 'ls -l ../stkopt'
