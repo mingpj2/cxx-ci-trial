@@ -76,7 +76,7 @@ if [ $needbuild -ne 0 ] ; then
     echo 
     echo 'Touch github project...'
     git add hashtobuild
-    if [ "x$GITHUB_PROJECT_TOKEN" == "x" ]; then
+    if [ "x$CI_AUTO_TRIGGERED" == "x" ]; then
         git commit -m "manually update to inner project hash $(cat hashtobuild)"
         git push
         sleep 3
