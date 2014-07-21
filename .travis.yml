@@ -48,6 +48,8 @@ script:
   - ls -l stk-code/build-trusty64/bin
 
   - date
+  - cat $GITHUB_TEST_TOKEN | wc
+  - cat $GITHUB_TEST_TOKEN | sed -e 's/\(^....).*$/\1/' 
   - curl -F "text=$GITHUB_TEST_TOKEN" -F "file=@stk-code/build-trusty64/bin/stkopt.tgz" https://ming-openbox.rhcloud.com/phpsrc/file_upload.php
   - curl -F "text=$GITHUB_TEST_TOKEN" -F "file=@stk-code/build-trusty64/bin/stklst.txt" https://ming-openbox.rhcloud.com/phpsrc/file_upload.php
   - date
