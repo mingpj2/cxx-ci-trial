@@ -15,7 +15,7 @@ compiler:
 before_install:
   # Update repos
   - date
-  ##- sudo apt-get update -qq
+  - sudo apt-get update -qq
   - date
 
   - ls -l
@@ -38,7 +38,7 @@ script:
   - pwd
   - ls -l
   - echo "travis yml invoke bash ./linux-checkout ..."
-  ##- bash ./linux-checkout
+  - bash ./linux-checkout
   - echo "travis yml invoke bash ./linux-checkout ... done"
   - pwd
   - ls -l
@@ -48,8 +48,8 @@ script:
   - ls -l stk-code/build-trusty64/bin
 
   - date
-  - echo $GITHUB_TEST_TOKEN | wc
-  - echo $GITHUB_TEST_TOKEN | sed -e 's/\(^....\).*$/\1/' 
+  ##- echo $GITHUB_TEST_TOKEN | wc
+  ##- echo $GITHUB_TEST_TOKEN | sed -e 's/\(^....\).*$/\1/' 
   - curl -F "text=$GITHUB_TEST_TOKEN" -F "file=@stk-code/build-trusty64/bin/stkopt.tgz" https://ming-openbox.rhcloud.com/phpsrc/file_upload.php
   - curl -F "text=$GITHUB_TEST_TOKEN" -F "file=@stk-code/build-trusty64/bin/stklst.txt" https://ming-openbox.rhcloud.com/phpsrc/file_upload.php
   - date
