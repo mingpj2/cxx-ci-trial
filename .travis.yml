@@ -6,7 +6,7 @@
 
 env:
   global:
-    - secure: "KQgswbw1bXWoaP/AK45iKeWey7iS0qyPpYWG70lXUFOCtf/Sv20EA3e8FE9YYhyiCkfmpocluHWy98XyQQqTSqQAxoJ+YB5zHWy7gUXSkD19wo3dxVcC1qDq+SepdMT9rbAdiIELg1dR8Nx/y03dDxEc2eLHFttCf2JUyQaGYtI="
+    - secure: "M+S7+pARuCmzbBFZv5XK++/gsnCJHg07QAOOGjX1jNPO1wVOwixM9Iek4RliNcoAaGjH+Dd8Zo2KjcIIVES+baqyzSFbp7GQ2E2+E3OYe/h1ovnpFCo8Y3qwb/C0KGbdprlzj62yVowrNzqfyBU5MZ3CBbMvs5FqDadCplHN+5Y="
 
 language: cpp
 compiler:
