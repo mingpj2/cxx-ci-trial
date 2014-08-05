@@ -28,7 +28,7 @@ all:
 	# Install chroot system -- configure debootstrap
 	##- ls -ld /usr/share/debootstrap/scripts/*
 	grep 'Essential' /usr/share/debootstrap/scripts/gutsy
-	sudo sed -e 's/Essential: yes)\"/Essential: yes) sudo cmake libogg-dev libvorbis-dev  libxxf86vm-dev libcurl4-openssl-dev libfribidi-dev libbluetooth-dev libgl1-mesa-dev libglu1-mesa-dev \"/' -i /usr/share/debootstrap/scripts/gutsy
+	sudo sed -e 's/Essential: yes)\"/Essential: yes) sudo cmake libogg-dev libvorbis-dev  libxxf86vm-dev libcurl4-openssl-dev libfribidi-dev libbluetooth-dev libgl1-mesa-dev libglu1-mesa-dev libxrandr-dev \"/' -i /usr/share/debootstrap/scripts/gutsy
 	grep 'Essential' /usr/share/debootstrap/scripts/gutsy
 	
 	# Install chroot system -- debootstrap install the chroot 
