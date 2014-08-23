@@ -76,6 +76,18 @@ suffix=$(cat ../xlog-hash1)-$dstamp
 
   echo '#!/bin/bash' > ../stkopt/go
   echo 'DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"' >> ../stkopt/go
+  echo 'KARTS=$DIR/stk-assets/karts' >> ../stkopt/go
+  echo 'if [ ! -d $KARTS ]; then' >> ../stkopt/go
+  echo '  echo '              >> ../stkopt/go
+  echo '  echo No karts directory found. Fix it by: ' >> ../stkopt/go
+  echo '  echo '              >> ../stkopt/go
+  echo '  echo "  " cd $DIR ' >> ../stkopt/go
+  echo '  echo "  " svn co https://svn.code.sf.net/p/supertuxkart/code/stk-assets' >> ../stkopt/go
+  echo '  echo '              >> ../stkopt/go
+  echo '  echo If you already have a stk-assets directory, make a link to it.'     >> ../stkopt/go
+  echo '  echo '              >> ../stkopt/go
+  echo '  exit 1 '            >> ../stkopt/go
+  echo 'fi' >> ../stkopt/go
   echo 'HOME=$DIR $DIR/supertuxkart $*' >> ../stkopt/go
   chmod a+rx ../stkopt/go
 
