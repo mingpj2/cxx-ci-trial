@@ -46,6 +46,7 @@ script:
   - ls -l
   - ls -l stk-code/build-trusty64
   - ls -l stk-code/build-trusty64/bin
+  - if [ ! -f stk-code/build-trusty64/bin/supertuxkart.dbgsymbols ]; then exit 1; fi
 
   - date
   ##- echo $GITHUB_TEST_TOKEN | wc
