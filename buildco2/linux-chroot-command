@@ -52,6 +52,7 @@ suffix=$(cat ../xlog-hash1)-$dstamp
   rm -r ../stkopt/bin ../stkopt/share
 
   ln -s ../stk-assets/karts    ../stkopt/data/karts
+  ln -s ../stk-assets/library  ../stkopt/data/library
   ln -s ../stk-assets/music    ../stkopt/data/music
   ln -s ../stk-assets/models   ../stkopt/data/models  
   ln -s ../stk-assets/sfx      ../stkopt/data/sfx  
