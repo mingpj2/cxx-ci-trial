@@ -60,7 +60,10 @@ all:
 	schroot -c trusty -- ls -l
 	schroot -c trusty -- ls -l /
 	schroot -c trusty -- sudo apt-cache policy
+	echo
 	schroot -c trusty -- sudo apt-get -y install libopenal-dev
+	echo
+	schroot -c trusty -- sudo apt-get -y install libpng12-dev
 	
 	# Install chroot dependencies
 	schroot -c trusty -- sudo apt-get update -qq
