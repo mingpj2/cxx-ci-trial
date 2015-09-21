@@ -63,7 +63,7 @@ all:
 	echo
 	schroot -c trusty -- sudo apt-get -y install libopenal-dev
 	echo
-	schroot -c trusty -- sudo apt-get -y install libpng12-dev
+	schroot -c trusty -- sudo apt-get -y install libpng12-dev libjpeg-dev
 	
 	# Install chroot dependencies
 	schroot -c trusty -- sudo apt-get update -qq
